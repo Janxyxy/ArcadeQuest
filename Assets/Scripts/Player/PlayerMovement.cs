@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -15,13 +16,20 @@ public class PlayerMovement : MonoBehaviour
     private float xRotation = 0f;
     private Vector3 velocity;
 
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        if (MenuManager.IsMenuOpen) 
+            return;
+
         Move();
         Look();
     }
